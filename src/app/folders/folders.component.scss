@@ -1,0 +1,28 @@
+@import '../../global.scss';
+
+#folder-container {
+    background-color: $divider-color;
+    box-sizing: border-box;
+
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    
+    .folder-list {
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+        flex: 2;
+        overflow: scroll;
+        border-right: 1px solid $primary-color;
+    }
+
+    .tool-bar {
+        padding: 10px 0px;        
+        button {
+            margin-right: 10px;
+            float: right;
+        }
+        border-right: 1px solid $primary-color;
+    }   
+}

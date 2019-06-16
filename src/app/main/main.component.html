@@ -1,0 +1,18 @@
+<div id="main-container">
+  <div id="left-panel">
+      <folders [folders]="oFolders$ | async"
+               [selectedFolder]="oFolder$ | async">
+      </folders>
+  </div>
+  <div id="right-panel">
+    <folder-view [folder]="oFolder$ | async"
+                 [snippet]="oSnippet$ | async"
+                 (snippetNameChange)="onSnippetNameChange($event)">
+    </folder-view>
+    <file-view [snippet]="oSnippet$ | async"
+               [theme]="theme"
+               (snippetDataChange)="onSnippetDataChanged($event)"
+               (themeChange)="onThemeChange($event)">      
+    </file-view>
+  </div>
+</div>

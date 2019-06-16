@@ -1,0 +1,25 @@
+@import '../../global.scss';
+
+:host{
+    width: 100vw;
+    height: 100vh;
+}
+
+#main-container {
+
+    display: flex;
+
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: 100%;
+
+    #right-panel {
+
+        min-width: 200px;
+        flex: 2;
+
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+}

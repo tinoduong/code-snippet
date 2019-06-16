@@ -1,0 +1,27 @@
+<li [ngClass]="{ 'folder': true, 'selected': isSelected, 'editing': folder.isEditing, 'hidden': folder.isHidden }"
+    (click)="onClick()">
+
+  <span>
+    <mat-icon *ngIf="!isSelected" class="folder-icon" color="primary">folder</mat-icon>
+    <mat-icon *ngIf="isSelected" class="folder-icon"  color="primary">folder_open</mat-icon>
+  </span>
+
+  <span *ngIf="!folder?.isEditing; else elseBlock" class="input">
+      <mat-label class="folder-name">{{ folder.name }}</mat-label>
+  </span>
+  <ng-template #elseBlock>
+     <span class="input">
+        <mat-form-field [hideRequiredMarker]="true" [floatLabel]="never">
+            <mat-label></mat-label>
+            <input matInput placeholder="Folder Name"
+                   [(ngModel)]="folder.name"
+                   (keyup.enter)="onKeyUp($event)" required>
+        </mat-form-field>
+     </span>
+  </ng-template>
+
+  <span class="folder-edit-icon-container">
+      <mat-icon class="folder-edit-icon" (click)="onEdit()" color="accent"> edit </mat-icon>
+  </span>
+
+</li>

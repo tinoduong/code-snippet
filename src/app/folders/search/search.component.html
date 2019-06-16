@@ -1,0 +1,19 @@
+<div class="search-container">
+
+  <input class="search-container-input"
+         placeholder="Search"
+         type="text"
+         [(ngModel)]="search"
+         (keyup)="onSearch()"/>
+
+  <mat-icon *ngIf="!search"
+            class="search-icon">
+      search
+  </mat-icon> 
+  <mat-icon *ngIf="search"
+            class="search-icon"
+            (click)="onClick()">
+      highlight_off
+  </mat-icon> 
+  
+</div>

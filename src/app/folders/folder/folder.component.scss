@@ -1,0 +1,51 @@
+@import '../../../global.scss';
+
+.folder {
+
+    padding: 0px 10px;
+    height: 65px;
+    min-width: 250px;
+    cursor: pointer;
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    
+    .input {
+        flex: 2;
+        display: inline-block;
+    }
+
+    .folder-icon {
+        font-size: 35px;
+        width: 36px;
+        height: 36px;
+        margin-right: 5px;
+    }
+
+    &:hover {
+        background-color: $primary-color-light;
+    }
+
+    &.selected {
+        background-color: $primary-color-light;
+    }
+
+    &:hover .folder-edit-icon-container,
+    &.selected .folder-edit-icon-container { 
+        visibility: visible;
+    }
+
+    .folder-edit-icon-container {
+        visibility: hidden;
+
+        .folder-edit-icon {
+            font-size: 16px;
+        }
+    }    
+    
+    &.hidden {
+        display: none;
+    }
+
+}

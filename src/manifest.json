@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+  
+    "name": "Code Snippets",
+    "description": "This extension lets you keep track of code samples for quick reference",
+    "version": "0.0.1",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon120.png"
+      },
+    "browser_action": {
+     "default_icon": "icon48.png",
+     "default_popup": "popup.html"
+    },
+    "permissions": [
+     "storage"
+     ],
+     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  }

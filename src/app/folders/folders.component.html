@@ -1,0 +1,33 @@
+
+<div id="folder-container">
+    <search></search>
+    <ul class="folder-list"
+        cdkDropList
+        (cdkDropListDropped)="drop($event)">
+        <folder *ngFor="let folder of folders; let i = index"
+                [folder]="folder"
+                [isSelected]="folder?.id===selectedFolder?.id"
+                [index] = i
+                cdkDrag>
+        </folder>
+    </ul>
+
+    <div class="tool-bar">
+
+        <button class="remove-folder"
+                mat-flat-button 
+                (click)="removeFolder()"
+                 color="primary">
+                <mat-icon>remove</mat-icon>
+        </button>
+
+        <button class="add-folder"
+                mat-flat-button 
+                (click)="addFolder()"
+                color="primary">
+                <mat-icon>add</mat-icon>
+         </button>
+
+    </div>
+
+</div>

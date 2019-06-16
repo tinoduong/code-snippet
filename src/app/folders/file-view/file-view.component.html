@@ -1,0 +1,31 @@
+<div class="file-view-container">
+    <div class="header">
+
+      <span class="title">
+        {{snippet?.name}}
+      </span>
+      <span class="theme">
+        <mat-label class="label">Edit Theme</mat-label>
+        <mat-radio-group color="accent" (change)="onThemeChange($event)">
+            <mat-radio-button
+                  class="light"
+                  [value]="themes.light"
+                  [checked]="theme===themes.light"> 
+                  Light
+            </mat-radio-button>
+            <mat-radio-button class="dark"
+                              [value]="themes.dark"
+                              [checked]="theme===themes.dark">
+                              Dark
+            </mat-radio-button>
+        </mat-radio-group>
+      </span>
+    </div>
+    <div id="file-content"
+         (keyup)="editorChange()"
+         (paste)="editorChange()">
+
+        <pre id="editor">  
+        </pre>
+    </div>
+</div>
