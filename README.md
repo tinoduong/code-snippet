@@ -1,11 +1,11 @@
-# CodeCollector
+# Code Snippets
 
 
 This project allows you to store text samples in a manner that is easy to manage and access. Choose from an selection of several languages for automatic syntax highlighting.
 
 All you data will be stored via local storage
 
-This project is meant to be deployed as a chrome extension. 
+This project is meant to be deployed in a chrome extension.
 
 ![Alt text](screenshot.png?raw=true "Title")
 
@@ -26,7 +26,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng run test` to execute the unit tests via Jest
+Run `npm run test` to execute the unit tests via Jest
 
 
 ## Deployment
