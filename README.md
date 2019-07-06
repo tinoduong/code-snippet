@@ -7,6 +7,8 @@ All you data will be stored via local storage
 
 This project is meant to be deployed as a chrome extension. 
 
+![Alt text](screenshot.png?raw=true "Title")
+
 
 ## Development server
 
