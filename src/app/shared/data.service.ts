@@ -9,10 +9,9 @@ import { throwIfEmpty } from 'rxjs/operators';
 })
 export class DataService {
 
-  private data: Folder[];
   private theme: SyntaxTheme;
-  private version;
   private isSearching: boolean;
+  private version;
 
   // The list of folders
   private folders = new BehaviorSubject<Folder[]>(undefined);
@@ -37,7 +36,6 @@ export class DataService {
     const fullData = this.readFromLocalStorage();
     const store = !fullData || !fullData.folders ? defStore : fullData;
 
-    this.data = store.folders;
     this.version = store.version;
     this.theme = store.theme;
     this.isSearching = false;
@@ -45,14 +43,18 @@ export class DataService {
     // always start the session without filters
     this.removeHidden();
 
-    this.broadcastData();
+    this.broadcastData(store.folders);
   }
 
-  private broadcastData() {
+  private broadcastData(folders ?: Folder[]) {
 
-    this.folders.next(this.data);
+    if (folders) {
+      this.folders.next(folders);
+    }
 
-    const firstFolder = this.data.filter(f => !f.isHidden);
+    const data = folders || this.getFolders();
+
+    const firstFolder = data.filter(f => !f.isHidden);
 
     if (!firstFolder.length) {
 
@@ -116,15 +118,22 @@ export class DataService {
     return nData;
   }
 
+  private getFolders(): Folder[] {
+    return this.folders.value;
+  }
+
   private removeHidden() {
 
     if (this.isSearching) { return; }
-    this.data.forEach(folder => {
+    const data = this.getFolders() || [];
+
+    data.forEach(folder => {
       folder.isHidden = false;
       folder.snippets.forEach(snippet => {
         snippet.isHidden = false;
       });
     });
+
   }
 
   turnOffEdit() {
@@ -140,9 +149,10 @@ export class DataService {
   selectFolder(index: number) {
 
     this.turnOffEdit();
+    const data = this.getFolders();
+    const toSelect = data[index];
 
-    const toSelect = this.data[index];
-    this.folder.next(this.data[index]);
+    this.folder.next(data[index]);
 
     if (toSelect.snippets.length) {
 
@@ -164,12 +174,12 @@ export class DataService {
   addFolder() {
 
     this.turnOffEdit();
+    const data = this.cloneData(this.folders.value);
 
-    this.data = this.cloneData(this.data);
-    this.data.push(this.createFolder());
+    data.push(this.createFolder());
 
-    this.folders.next(this.data);
-    this.selectFolder(this.data.length - 1);
+    this.folders.next(data);
+    this.selectFolder(data.length - 1);
     this.writeToLocalStorage();
   }
 
@@ -204,7 +214,7 @@ export class DataService {
 
     this.turnOffEdit();
 
-    const folders = this.folders.value;
+    const folders = this.getFolders();
     const cFolder = this.cloneData(folders[i]);
     const nFolder = this.cloneData(cFolder);
 
@@ -231,11 +241,12 @@ export class DataService {
 
   removeFolder(id: string) {
 
-    this.data = this.data.filter((f) => {
+    const data = this.getFolders();
+    const updateData = data.filter((f) => {
       return f.id !== id;
     });
 
-    this.folders.next(this.data);
+    this.folders.next(updateData);
     this.writeToLocalStorage();
   }
 
@@ -267,7 +278,7 @@ export class DataService {
     const store = {
       version: this.version,
       theme: this.theme,
-      folders: this.data
+      folders: this.getFolders()
     };
 
     // TODO: Turn this into a debounced call so
@@ -289,8 +300,7 @@ export class DataService {
   }
 
   updateSearchFilter(strSearch: string) {
-
-    const data = this.data;
+    const data = this.getFolders();
     this.isSearching = !!strSearch;
 
     if (!strSearch) {
@@ -332,9 +342,10 @@ export class DataService {
   }
 
   moveFolder(prevIndex: number, currIndex: number) {
-    const folders = this.cloneData(this.data);
 
-    this.data = this.moveItem(folders, prevIndex, currIndex);
+    const folders = this.cloneData(this.getFolders());
+    this.moveItem(folders, prevIndex, currIndex);
+
     this.folders.next(folders);
     this.folder.next(folders[currIndex] || this.folder.value);
     this.writeToLocalStorage();
