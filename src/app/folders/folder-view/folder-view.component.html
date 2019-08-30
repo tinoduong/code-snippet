@@ -56,13 +56,13 @@
           <!-- Weight Column -->
           <ng-container matColumnDef="dateCreated">
             <th mat-header-cell *matHeaderCellDef> Created </th>
-            <td mat-cell *matCellDef="let element"> {{element.dateCreated | date:'h:mm:ss a'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.dateCreated | date:'MM-dd-yyyy h:mm a'}} </td>
           </ng-container>
         
           <!-- Symbol Column -->
           <ng-container matColumnDef="dateModified">
             <th mat-header-cell *matHeaderCellDef> Modifed </th>
-            <td mat-cell *matCellDef="let element"> {{element.dateModified | date:'h:mm:ss a'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.dateModified | date:'MM-dd-yyyy h:mm a'}} </td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

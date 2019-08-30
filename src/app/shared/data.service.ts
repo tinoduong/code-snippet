@@ -202,6 +202,7 @@ export class DataService {
     const nSnippets = this.cloneData(cFolder.snippets);
 
     nSnippet.locked = !nSnippet.locked;
+    nSnippet.dateModified = new Date();
     nSnippets[i] = nSnippet;
     cFolder.snippets = nSnippets;
 
@@ -231,6 +232,7 @@ export class DataService {
     const nSnippets = this.cloneData(cFolder.snippets);
 
     nSnippet.language = langauge;
+    nSnippet.dateModified = new Date();
     nSnippets[i] = nSnippet;
     cFolder.snippets = nSnippets;
 

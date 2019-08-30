@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/data.service';
 import { Folder, Snippet, SyntaxTheme } from '../shared/globals';
 import { Observable, Subject } from 'rxjs';
@@ -43,11 +43,13 @@ export class MainComponent implements OnInit {
 
   onSnippetDataChanged(data: string) {
     this.snippet.data = data;
+    this.snippet.dateModified = new Date();
     this.writeToCache.next();
   }
 
   onSnippetNameChange(data: string) {
     this.snippet.name = data;
+    this.snippet.dateModified = new Date();
     this.writeToCache.next();
   }
 

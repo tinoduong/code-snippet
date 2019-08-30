@@ -25,7 +25,6 @@ import {
   MatRadioModule
 
 } from '@angular/material';
-import { TestObject } from 'protractor/built/driverProviders';
 
 class MockDataService extends DataService {
 
@@ -114,12 +113,14 @@ describe('MainComponent', () => {
     const writeToLocalStorage = spyOn(dataSvc, 'writeToLocalStorage');
 
     const folderView = fixture.debugElement.query(By.directive(FolderViewComponent));
+    const oldDate = component.snippet.dateModified;
     folderView.componentInstance.snippetNameChange.emit(fakeSnippetUpdate);
 
     tick(600);
     fixture.detectChanges();
 
     expect(component.snippet.name).toEqual(fakeSnippetUpdate);
+    expect(oldDate).not.toBe(component.snippet.dateModified);
     expect(writeToLocalStorage).toHaveBeenCalledTimes(1);
 
   }));
@@ -143,6 +144,7 @@ describe('MainComponent', () => {
 
     const dataChanged = 'New Snippet data';
     const writeToLocalStorage = spyOn(dataSvc, 'writeToLocalStorage');
+    const oldDate = component.snippet.dateModified;
 
     const fileView = fixture.debugElement.query(By.directive(FileViewComponent));
     fileView.componentInstance.snippetDataChange.emit(dataChanged);
@@ -150,6 +152,8 @@ describe('MainComponent', () => {
     fixture.detectChanges();
 
     expect(component.snippet.data).toEqual(dataChanged);
+    expect(oldDate).not.toBe(component.snippet.dateModified);
+
     expect(writeToLocalStorage).toHaveBeenCalledTimes(1);
 
   }));
