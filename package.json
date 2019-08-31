@@ -73,5 +73,10 @@
         }
       ]
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "ng lint"
+    }
   }
 }
